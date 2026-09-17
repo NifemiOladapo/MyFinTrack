@@ -14,6 +14,7 @@ export async function getCryptoPrices(ids: string[]) {
   if (!response.ok) {
     throw new Error(`CoinGecko request failed: ${response.status}`);
   }
+  // await new Promise((res) => setTimeout(res, 5000));
 
   return response.json();
 }

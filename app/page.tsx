@@ -5,12 +5,12 @@ import { cache } from "react";
 
 export const STALE_HOLDINGS: Holding[] = [
   { id: "btc", symbol: "BTC", name: "Bitcoin", quantity: 5 },
-  { id: "eth", symbol: "ETH", name: "Ethereum", quantity: 2.4 },
+  { id: "eth", symbol: "ETH", name: "Ethereum", quantity: 100 },
   // { id: "aapl", symbol: "AAPL", name: "Apple", quantity: 32 },
 ];
 
 export const getAssets = cache(async () => {
-  await new Promise((res) => setTimeout(res, 1000));
+  await new Promise((res) => setTimeout(res, 3000));
   return STALE_HOLDINGS;
 });
 
