@@ -2,12 +2,14 @@
 
 import { useState } from "react";
 import { AddHoldingModal } from "./AddHoldingModal";
+import { createHolding } from "@/actions/holding";
 
 const AddHolding = ({ prices }: { prices: any }) => {
   const [showAddHolding, setShowAddHolding] = useState(false);
 
-  const handleAddHolding = (data: any) => {
-    console.log(data);
+  const handleAddHolding = async (data: any) => {
+    const holding = await createHolding(data);
+    console.log(holding);
   };
 
   return (

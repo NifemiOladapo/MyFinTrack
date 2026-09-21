@@ -1,7 +1,7 @@
 const COINGECKO_BASE_URL = "https://api.coingecko.com/api/v3";
 
 export async function getCryptoPrices(ids: string[]) {
-  console.log("I ran")
+  console.log("I ran");
   const url = new URL(`${COINGECKO_BASE_URL}/simple/price`);
 
   url.searchParams.set("ids", ids.join(","));
