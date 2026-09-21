@@ -1,11 +1,11 @@
 export default function NetWorthSkeleton() {
   return (
-    <div className="flex-1 p-5 ">
-      <div className="mb-6">Net worth, last 30 days</div>
+    <div className="flex-1 py-5 ">
+      <div className="mb-6 text-sm">Net worth, last 30 days</div>
 
       <div className="flex gap-2">
         {/* Y axis */}
-        <div className="flex h-[170px] flex-col justify-between">
+        <div className="flex h-42.5 flex-col justify-between">
           {Array.from({ length: 7 }).map((_, index) => (
             <div
               key={index}

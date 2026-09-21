@@ -40,7 +40,7 @@ const HoldingsAllocation = async () => {
     .join(", ");
 
   return (
-    <div className=" bg-neutral-950 p-5 flex-1">
+    <div className=" bg-neutral-950 py-5 flex-1">
       <h2 className="mb-6 text-sm font-medium text-neutral-300">Allocation</h2>
 
       <div className="flex flex-col items-center gap-6">

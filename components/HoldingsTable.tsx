@@ -98,7 +98,7 @@ export default async function HoldingsTable() {
   const prices = await getPrices();
 
   return (
-    <section className="rounded-xl bg-neutral-950 p-5 border border-neutral-800">
+    <section className="rounded-xl bg-neutral-950 px-3 py-5  sm:p-5 border border-neutral-800">
       <div className="mb-4 flex items-center justify-between">
         <h2 className="text-sm font-medium text-neutral-300">Holdings</h2>
         <AddHolding prices={prices} />

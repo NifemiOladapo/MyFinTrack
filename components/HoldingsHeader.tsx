@@ -13,21 +13,23 @@ export default async function HoldingsHeader() {
   }, 0);
 
   return (
-    <div className="bg-neutral-950 px-6 py-6">
+    <div className="bg-neutral-950  py-6">
       <div className="flex gap-16 justify-between">
         <div>
           <p className="text-sm text-neutral-400">Total value</p>
-          <p className="mt-1 text-3xl font-semibold text-white">
+          <p className="mt-1 text-xl sm:text-3xl font-semibold text-white">
             {currency.format(totalValue)}
           </p>
         </div>
         <div>
           <p className="text-sm text-neutral-400">Today</p>
-          <p className="mt-1 text-3xl font-semibold text-green-500">+$582</p>
+          <p className="mt-1 text-xl sm:text-3xl font-semibold text-green-500">
+            +$582
+          </p>
         </div>
         <div>
           <p className="text-sm text-neutral-400">Holdings</p>
-          <p className="mt-1 text-3xl font-semibold text-white">
+          <p className="mt-1 text-xl sm:text-3xl font-semibold text-white">
             {holdings.length}
           </p>
         </div>
