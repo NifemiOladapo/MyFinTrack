@@ -8,9 +8,7 @@ const PriceAndValueField = async ({
   holding: Holding;
   assets: Holding[];
 }) => {
-  const prices = await getPrices(
-    assets.map((asset) => asset.name.toLowerCase()),
-  );
+  const prices = await getPrices();
   const priceDisp = prices[holding.name.toLowerCase()]?.usd || 0;
   const value = holding.quantity * priceDisp;
 

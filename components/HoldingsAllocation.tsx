@@ -8,10 +8,8 @@ const ASSET_COLORS: Record<string, string> = {
 
 const HoldingsAllocation = async () => {
   const holdings = await getAssets();
-
-  const prices = await getPrices(
-    holdings.map((holding) => holding.name.toLowerCase()),
-  );
+  // console.log(holdings);
+  const prices = await getPrices();
 
   const totalValue = holdings.reduce((total, holding) => {
     const price = prices[holding.name.toLowerCase()]?.usd ?? 0;

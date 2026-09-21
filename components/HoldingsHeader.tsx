@@ -4,9 +4,7 @@ import { currency } from "./HoldingsTable";
 export default async function HoldingsHeader() {
   const holdings = await getAssets();
 
-  const prices = await getPrices(
-    holdings.map((holding) => holding.name.toLowerCase()),
-  );
+  const prices = await getPrices();
 
   const totalValue = holdings.reduce((total, holding) => {
     const price = prices[holding.name.toLowerCase()]?.usd ?? 0;

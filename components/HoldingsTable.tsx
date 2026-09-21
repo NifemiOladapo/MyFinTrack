@@ -1,6 +1,7 @@
 import { type ReactNode } from "react";
 import PriceAndValueField from "./PriceAndValueField";
-import { getAssets, STALE_HOLDINGS } from "@/app/page";
+import { getAssets, getPrices, STALE_HOLDINGS } from "@/app/page";
+import AddHolding from "./AddHolding";
 
 type AssetSymbol = "BTC" | "ETH" | "AAPL";
 
@@ -92,19 +93,15 @@ function HoldingRow({
   );
 }
 
-export default async function HoldingsTable({ onAddHolding }: HoldingsProps) {
+export default async function HoldingsTable() {
   const holdings = await getAssets();
+  const prices = await getPrices();
+
   return (
     <section className="rounded-xl bg-neutral-950 p-5 border border-neutral-800">
       <div className="mb-4 flex items-center justify-between">
         <h2 className="text-sm font-medium text-neutral-300">Holdings</h2>
-        <button
-          type="button"
-          onClick={onAddHolding}
-          className="rounded-lg cursor-pointer border border-neutral-700 px-3 py-1.5 text-sm text-neutral-200 transition-colors hover:bg-neutral-800"
-        >
-          + Add holding
-        </button>
+        <AddHolding prices={prices} />
       </div>
 
       {holdings.length === 0 ? (
