@@ -1,7 +1,8 @@
 import { TOP_25_COINS } from "@/data/constants";
-import { Check, ChevronDown, Search, X } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { Check, ChevronDown, Loader2, Search, X } from "lucide-react";
+import { useEffect, useRef, useState, useTransition } from "react";
 import { currency } from "./HoldingsTable";
+import { createHolding } from "@/actions/holding";
 
 type AssetType = "crypto" | "stock";
 
@@ -13,7 +14,6 @@ type Asset = {
 
 type AddHoldingModalProps = {
   onClose: () => void;
-  onSubmit: (data: { asset: Asset; quantity: number; type: AssetType }) => void;
   prices: any;
 };
 
@@ -23,11 +23,7 @@ const assets: Asset[] = TOP_25_COINS.map((coin) => ({
   name: coin.name,
 }));
 
-export function AddHoldingModal({
-  onClose,
-  onSubmit,
-  prices,
-}: AddHoldingModalProps) {
+export function AddHoldingModal({ onClose, prices }: AddHoldingModalProps) {
   const [type, setType] = useState<AssetType>("crypto");
   const [selectedAsset, setSelectedAsset] = useState<Asset>(assets[0]);
   const [quantity, setQuantity] = useState("0.25");
@@ -41,6 +37,8 @@ export function AddHoldingModal({
   const searchInputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
 
+  const [isPending, startTransition] = useTransition();
+
   const filteredAssets = assets.filter((asset) =>
     `${asset.name} ${asset.symbol}`
       .toLowerCase()
@@ -49,20 +47,6 @@ export function AddHoldingModal({
 
   const assetPrice = prices[selectedAsset.name.toLowerCase()]?.usd || 0;
   const estimatedValue = Number(quantity) * assetPrice;
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const parsedQuantity = Number(quantity);
-
-    if (!parsedQuantity || parsedQuantity <= 0) return;
-
-    onSubmit({
-      asset: selectedAsset,
-      quantity: parsedQuantity,
-      type,
-    });
-  };
 
   // close whole modal on Escape
   useEffect(() => {
@@ -143,6 +127,27 @@ export function AddHoldingModal({
       setIsAssetOpen(false);
       setAssetSearch("");
     }
+  };
+
+  const handleAddHolding = async (data: any) => {
+    startTransition(async () => {
+      const holding = await createHolding(data);
+      console.log(holding);
+    });
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const parsedQuantity = Number(quantity);
+
+    if (!parsedQuantity || parsedQuantity <= 0) return;
+
+    handleAddHolding({
+      asset: selectedAsset,
+      quantity: parsedQuantity,
+      type,
+    });
   };
 
   return (
@@ -355,9 +360,10 @@ export function AddHoldingModal({
 
             <button
               type="submit"
+              disabled={isPending}
               className="h-11 rounded-xl bg-white text-sm font-medium text-black transition hover:bg-neutral-200"
             >
-              Add holding
+              {isPending ? <Loader2 className="animate-spin  mx-auto"/> : "Add holding"}
             </button>
           </div>
         </form>

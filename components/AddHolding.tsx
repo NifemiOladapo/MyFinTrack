@@ -7,11 +7,6 @@ import { createHolding } from "@/actions/holding";
 const AddHolding = ({ prices }: { prices: any }) => {
   const [showAddHolding, setShowAddHolding] = useState(false);
 
-  const handleAddHolding = async (data: any) => {
-    const holding = await createHolding(data);
-    console.log(holding);
-  };
-
   return (
     <>
       <button
@@ -25,7 +20,6 @@ const AddHolding = ({ prices }: { prices: any }) => {
         <AddHoldingModal
           prices={prices}
           onClose={() => setShowAddHolding(false)}
-          onSubmit={handleAddHolding}
         />
       )}
     </>

@@ -92,7 +92,7 @@ export async function createHolding(
         type,
       })
       .returning();
-
+    await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate a delay of 3 seconds
     return {
       success: true,
       data: holding,
